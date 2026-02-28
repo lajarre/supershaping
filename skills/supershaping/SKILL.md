@@ -27,13 +27,17 @@ Do NOT invoke when:
 
 ## Step 1: Determine feature folder
 
-Ask for the feature slug if not obvious from context. The feature folder is:
+Ask for the feature slug if not obvious from context. Suggest the current
+branch name as default. The feature folder is:
 
 ```
 doc/feature/YYYY-MM-DD-<slug>/
 ```
 
 Use today's date if creating a new folder.
+
+**Always confirm the feature folder with the user before proceeding.**
+Show the resolved path and ask: "Feature folder: `doc/feature/2026-02-27-waiver-signing/` — correct?"
 
 ## Step 2: Assess existing artifacts
 
