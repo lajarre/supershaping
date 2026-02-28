@@ -48,8 +48,10 @@ Present inventory: "Found: X, Y. Missing: Z."
 | Plan exists | **Execute** | Invoke executing-plans or subagent-driven-development |
 | External UX artifacts exist (screenshots, mockups, route maps), no shaping | **Shaping first** | Treat as Source material for the Frame |
 
-Interactive: present recommendation, let user decide.
-Autonomous: follow recommendation.
+**Present the recommendation and wait.** Do NOT invoke the downstream skill
+yourself — the user decides when to proceed. Your job is routing, not execution.
+
+Exception: in autonomous mode, follow the recommendation directly.
 
 ### Size signals
 
