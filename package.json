@@ -1,0 +1,19 @@
+{
+  "name": "supershaping",
+  "version": "0.1.0",
+  "description": "Route feature work between shaping-skills and superpowers — assess artifacts, recommend shaping-first vs direct execution, bridge slices into specs.",
+  "keywords": ["pi-package"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lajarre/supershaping.git"
+  },
+  "files": [
+    "skills/",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "skills": ["./skills"]
+  }
+}
