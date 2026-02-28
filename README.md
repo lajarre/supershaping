@@ -4,8 +4,15 @@ Route feature work between [shaping-skills](https://github.com/rjs/shaping-skill
 
 ## Install
 
+**Pi:**
 ```bash
 pi install git:github.com/lajarre/supershaping
+```
+
+**Claude Code:**
+```bash
+git clone https://github.com/lajarre/supershaping.git ~/.local/share/supershaping
+ln -s ~/.local/share/supershaping/skills/supershaping ~/.claude/skills/supershaping
 ```
 
 ## What it does
@@ -36,9 +43,9 @@ If external UX artifacts exist (screenshots, mockups, route maps), supershaping 
 
 ## Prerequisites
 
-- [Pi](https://github.com/mariozechner/pi) coding agent
 - [shaping-skills](https://github.com/rjs/shaping-skills) for the shaping methodology
 - [superpowers](https://github.com/obra/superpowers) for brainstorming/planning/execution
+- A coding agent that supports skills ([Pi](https://github.com/mariozechner/pi), [Claude Code](https://claude.ai/claude-code), etc.)
 
 ## License
 
