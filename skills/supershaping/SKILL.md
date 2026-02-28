@@ -30,7 +30,6 @@ Check the feature folder:
 | Frame | `frame.md` |
 | Shaping doc | `shaping.md` |
 | Slices | `slices.md` |
-| Prototype | `prototype/` |
 | Spec | `spec.md` or `V1-spec.md, V2-spec.md` |
 | Plan | `plan.md` or `V1-plan.md, V2-plan.md` |
 
@@ -47,7 +46,7 @@ Present inventory: "Found: X, Y. Missing: Z."
 | `slices.md`, no spec | **Pick slice → brainstorm** | Ask which slice, scope brainstorming to it |
 | Spec exists, no plan | **Write plan** | Invoke writing-plans |
 | Plan exists | **Execute** | Invoke executing-plans or subagent-driven-development |
-| `prototype/`, no shaping | **Shape from prototype** | Prototype feeds Frame's Source section |
+| External UX artifacts exist (screenshots, mockups, route maps), no shaping | **Shaping first** | Treat as Source material for the Frame |
 
 Interactive: present recommendation, let user decide.
 Autonomous: follow recommendation.
@@ -57,7 +56,7 @@ Autonomous: follow recommendation.
 - "small", "quick", "just add X" → small
 - Multiple components/pages/services → large
 - Shaping artifacts exist → already shaped
-- `prototype/` exists → medium+
+- External UX artifacts exist (mockups, screenshots) → medium+
 - Uncertain solution → shaping territory
 
 ---
@@ -81,25 +80,8 @@ When no frame or PRD exists, suggest:
 > "Start with `frame.md`: Source, Problem, Outcome, Metrics, Non-goals,
 > Kill criteria. Then proceed to requirements and shapes."
 
-If `prototype/` exists, add: "Use prototype as Source material in the Frame."
-
----
-
-## Prototype intake
-
-Expected structure (all files optional):
-
-```
-prototype/
-├── screenshots/     — Numbered screen captures
-├── routes.md        — Screen list + transitions
-├── components.md    — Key components + states
-└── copy.md          — UI text
-```
-
-- Into shaping: screenshots/routes become Frame Source material
-- Into brainstorming: reference material for spec writing
-- If artifacts don't match this structure, help reorganize (5 min task)
+If external UX artifacts exist (screenshots, mockups, route maps), add:
+"Use these as Source material in the Frame."
 
 ---
 
@@ -110,4 +92,4 @@ prototype/
 | Re-brainstorming requirements shaping already settled | Derive from shaping doc, don't re-negotiate |
 | Shaping a small/obvious change | Go direct to superpowers — shaping is overhead here |
 | Skipping Frame for large features | Frame captures why/metrics/kill criteria — prevents scope drift |
-| Treating prototype as spec | Prototype is input to shaping, not the solution |
+| Treating external UX artifacts as spec | External artifacts are input to shaping, not the solution |

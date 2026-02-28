@@ -10,7 +10,7 @@ pi install git:github.com/lajarre/supershaping
 
 ## What it does
 
-When you start feature work, supershaping checks your feature folder for existing artifacts (frame, shaping doc, slices, specs, plans, prototypes) and recommends the right path:
+When you start feature work, supershaping checks your feature folder for existing artifacts (frame, shaping doc, slices, specs, plans) and recommends the right path:
 
 | Situation | Route |
 |-----------|-------|
@@ -30,19 +30,9 @@ Supershaping works best with two small patches to sibling skill systems:
 
 **Frame extension** (shaping-skills) — extends the Frame document with Metrics, Non-goals, and Kill criteria, making it serve as a lightweight PRD. See [the patch](https://github.com/lajarre/shaping-skills/tree/feat/supershaping).
 
-## Prototype intake
+## External UX artifacts
 
-Supershaping also defines a convention for external UX artifacts (e.g., a cofounder's Claude-generated dummy app):
-
-```
-prototype/
-├── screenshots/     — Numbered screen captures
-├── routes.md        — Screen list + transitions
-├── components.md    — Key components + states
-└── copy.md          — UI text
-```
-
-Drop this folder in your feature directory and supershaping will route it into shaping as Source material.
+If external UX artifacts exist (screenshots, mockups, route maps), supershaping treats them as Source material for shaping's Frame document.
 
 ## Prerequisites
 
