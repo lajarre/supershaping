@@ -1,156 +1,113 @@
 ---
 name: supershaping
-description: Route feature work between shaping and superpowers. Assess existing artifacts, recommend shaping-first vs superpowers-direct, bridge slice output into brainstorming.
+description: Use when starting or resuming feature work that may involve shaping, brainstorming, or both — determines the right methodology based on existing artifacts in the feature folder.
 ---
 
 # Supershaping
 
-Route feature work to the right methodology based on what exists and
-what's needed.
-
----
-
-## When to invoke
-
-Use as the **entry point** for any feature work that might involve
-shaping, brainstorming, or both. Invoke when:
-
-- Starting a new feature (to decide the approach)
-- Resuming feature work (to assess where things stand)
-- A cofounder hands off prototype artifacts
-
-Do NOT invoke when:
-- You're already mid-shaping or mid-brainstorming (use those skills directly)
-- The task is a bugfix, refactor, or chore (no routing needed)
+Entry point for feature work. Checks what artifacts exist, recommends
+shaping-first vs superpowers-direct vs pick-a-slice.
 
 ---
 
 ## Step 1: Determine feature folder
 
-Ask for the feature slug if not obvious from context. Suggest the current
-branch name as default. The feature folder is:
+Ask for the feature slug (suggest current branch name as default).
 
 ```
 doc/feature/YYYY-MM-DD-<slug>/
 ```
 
-Use today's date if creating a new folder.
+**Confirm with user before proceeding:** "Feature folder: `doc/feature/2026-02-27-<slug>/` — correct?"
 
-**Always confirm the feature folder with the user before proceeding.**
-Show the resolved path and ask: "Feature folder: `doc/feature/2026-02-27-waiver-signing/` — correct?"
+## Step 2: Assess artifacts
 
-## Step 2: Assess existing artifacts
+Check the feature folder:
 
-Check the feature folder for:
+| Artifact | Path |
+|----------|------|
+| PRD | `prd.md` |
+| Frame | `frame.md` |
+| Shaping doc | `shaping.md` |
+| Slices | `slices.md` |
+| Prototype | `prototype/` |
+| Spec | `spec.md` or `V1-spec.md, V2-spec.md` |
+| Plan | `plan.md` or `V1-plan.md, V2-plan.md` |
 
-| Artifact | Path | Meaning |
-|----------|------|---------|
-| PRD | `prd.md` | Full PRD exists (brainstorming already reads this) |
-| Frame | `frame.md` | Lightweight PRD (extended Frame from shaping) |
-| Shaping doc | `shaping.md` | R, shapes, fit checks, breadboard |
-| Slices | `slices.md` | Slice definitions from shaping |
-| Prototype | `prototype/` | External UX artifacts (screenshots, routes, components) |
-| Spec | `spec.md` or `V1-spec.md, V2-spec.md` | Superpowers spec (already produced) |
-| Plan | `plan.md` or `V1-plan.md, V2-plan.md` | Implementation plan (already produced) |
-
-Present a short inventory: "Found: frame.md, shaping.md, slices.md. Missing: spec, plan."
+Present inventory: "Found: X, Y. Missing: Z."
 
 ## Step 3: Route
 
-Based on what exists and the user's description:
+| Situation | Route | Action |
+|-----------|-------|--------|
+| Nothing, small/clear scope | **Superpowers direct** | Invoke brainstorming |
+| Nothing, large/unclear | **Shaping first** | Start with Frame |
+| `frame.md` only | **Start shaping** | Proceed to R and shapes |
+| `shaping.md`, no slices | **Continue shaping** | Slice the breadboarded shape |
+| `slices.md`, no spec | **Pick slice → brainstorm** | Ask which slice, scope brainstorming to it |
+| Spec exists, no plan | **Write plan** | Invoke writing-plans |
+| Plan exists | **Execute** | Invoke executing-plans or subagent-driven-development |
+| `prototype/`, no shaping | **Shape from prototype** | Prototype feeds Frame's Source section |
 
-| Situation | Recommendation | Action |
-|-----------|---------------|--------|
-| Nothing exists, small/local/clear scope | **Superpowers direct** | Invoke brainstorming skill |
-| Nothing exists, large/multi-surface/unclear | **Shaping first** | Invoke shaping skill; suggest starting with Frame |
-| `frame.md` exists, no `shaping.md` | **Start shaping** | Frame is done, proceed to R and shapes |
-| `shaping.md` exists, no slices yet | **Continue shaping** | Invoke shaping skill to slice the breadboarded shape |
-| `slices.md` exists, no spec yet | **Pick slice → brainstorm** | Ask which slice, then invoke brainstorming scoped to that slice |
-| `spec.md` (or `V*-spec.md`) exists, no plan | **Write plan** | Invoke writing-plans skill |
-| `plan.md` (or `V*-plan.md`) exists | **Execute** | Invoke executing-plans or subagent-driven-development |
-| `prototype/` exists, no shaping | **Shape from prototype** | Invoke shaping; prototype feeds the Source section of the Frame |
+Interactive: present recommendation, let user decide.
+Autonomous: follow recommendation.
 
-**In interactive mode:** present the recommendation and let the user decide.
-**In autonomous mode:** follow the recommendation.
+### Size signals
 
-### Size heuristic
+- "small", "quick", "just add X" → small
+- Multiple components/pages/services → large
+- Shaping artifacts exist → already shaped
+- `prototype/` exists → medium+
+- Uncertain solution → shaping territory
 
-The router doesn't score formally. It uses signals:
+---
 
-- User says "small", "quick", "just add X" → small
-- User describes work touching multiple components/pages/services → large
-- Feature folder already has shaping artifacts → already shaped
-- Prototype folder exists → medium+ (someone invested in UX)
-- Uncertainty about solution approach → shaping territory
+## Bridging to brainstorming
+
+**Note:** Brainstorming requires superpowers mode active or explicit request.
+
+When slices exist, invoke brainstorming with this framing:
+
+> "Shaping is complete. `shaping.md` is ground truth for requirements.
+> Slices in `slices.md`. We're speccing slice [user's choice]. Derive
+> the spec — don't re-negotiate settled requirements."
+
+This tells brainstorming to **derive** not **discover**.
+
+## Bridging to shaping
+
+When no frame or PRD exists, suggest:
+
+> "Start with `frame.md`: Source, Problem, Outcome, Metrics, Non-goals,
+> Kill criteria. Then proceed to requirements and shapes."
+
+If `prototype/` exists, add: "Use prototype as Source material in the Frame."
 
 ---
 
 ## Prototype intake
 
-When `prototype/` is detected or the user mentions a cofounder handoff:
-
-### Expected structure
+Expected structure (all files optional):
 
 ```
 prototype/
-├── screenshots/          — Numbered screen captures
-│   ├── 01-landing.png
-│   ├── 02-form.png
-│   └── 03-confirmation.png
-├── routes.md             — Screen list + transitions
-├── components.md         — Key components + states
-└── copy.md               — UI text (so agents don't reinvent wording)
+├── screenshots/     — Numbered screen captures
+├── routes.md        — Screen list + transitions
+├── components.md    — Key components + states
+└── copy.md          — UI text
 ```
 
-All files are optional. Even just `screenshots/` is useful.
-
-### How it feeds the pipeline
-
-- **Into shaping:** Screenshots and routes become Source material in the
-  Frame. Components inform the breadboard. The prototype is input, not spec.
-- **Into brainstorming:** When shaping is done, the prototype is reference
-  material. Brainstorming can cite specific screens when producing the spec.
-- **Screenshots in context:** If the runtime supports image attachments
-  (Pi does), reference screenshots directly. Otherwise, describe them.
-
-### Helping the cofounder
-
-If the cofounder's artifacts don't match this structure, help reorganize:
-1. Put screenshots in `screenshots/` with numbered filenames
-2. Extract a quick route map into `routes.md` (list of screens + transitions)
-3. Note key components in `components.md`
-
-This is a 5-minute task, not a ceremony.
+- Into shaping: screenshots/routes become Frame Source material
+- Into brainstorming: reference material for spec writing
+- If artifacts don't match this structure, help reorganize (5 min task)
 
 ---
 
-## Integration with superpowers brainstorming
+## Common mistakes
 
-**Note:** Brainstorming requires superpowers mode to be active (or explicit user request). If routing to brainstorming, either activate superpowers first or invoke brainstorming explicitly.
-
-When routing to brainstorming with shaping artifacts present, the router
-**does not** re-invoke shaping. Instead, it invokes brainstorming with
-context:
-
-> "Shaping is complete for this feature. The shaping doc at `shaping.md`
-> is ground truth for requirements and design decisions. Slices are defined
-> in `slices.md`. We're speccing slice [substitute the slice the user selected]. Derive the spec from
-> the shaping output — don't re-negotiate settled requirements."
-
-This framing tells brainstorming to **derive** rather than **discover**.
-
----
-
-## Integration with shaping
-
-When routing to shaping, the router suggests starting with Frame if none
-exists:
-
-> "No frame or PRD found. Consider starting with a Frame document
-> (`frame.md`) to capture: Source, Problem, Outcome, Metrics, Non-goals,
-> Kill criteria. Then proceed to requirements and shapes."
-
-If `prototype/` exists:
-
-> "Prototype artifacts found. Use these as Source material in the Frame.
-> Screenshots and routes can inform the breadboard."
+| Mistake | Fix |
+|---------|-----|
+| Re-brainstorming requirements shaping already settled | Derive from shaping doc, don't re-negotiate |
+| Shaping a small/obvious change | Go direct to superpowers — shaping is overhead here |
+| Skipping Frame for large features | Frame captures why/metrics/kill criteria — prevents scope drift |
+| Treating prototype as spec | Prototype is input to shaping, not the solution |
